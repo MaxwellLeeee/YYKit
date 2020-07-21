@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A51E91524C5ACF4000D0428 /* LCLinkedListNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A51E91424C5ACF4000D0428 /* LCLinkedListNode.m */; };
+		1A51E91824C5AFD3000D0428 /* LCLinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A51E91724C5AFD3000D0428 /* LCLinkedList.m */; };
 		ABDC320D1BEAFB870012A159 /* YYTextTagExample.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDC320C1BEAFB870012A159 /* YYTextTagExample.m */; };
 		D9067DF11B975D3900F346EB /* YYTextExampleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D9067DF01B975D3900F346EB /* YYTextExampleHelper.m */; };
 		D9067DF41B9813B500F346EB /* YYTextEditExample.m in Sources */ = {isa = PBXBuildFile; fileRef = D9067DF31B9813B500F346EB /* YYTextEditExample.m */; };
@@ -196,6 +198,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A51E91324C5ACF4000D0428 /* LCLinkedListNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCLinkedListNode.h; sourceTree = "<group>"; };
+		1A51E91424C5ACF4000D0428 /* LCLinkedListNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLinkedListNode.m; sourceTree = "<group>"; };
+		1A51E91624C5AFD3000D0428 /* LCLinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCLinkedList.h; sourceTree = "<group>"; };
+		1A51E91724C5AFD3000D0428 /* LCLinkedList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLinkedList.m; sourceTree = "<group>"; };
 		ABDC320B1BEAFB870012A159 /* YYTextTagExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextTagExample.h; sourceTree = "<group>"; };
 		ABDC320C1BEAFB870012A159 /* YYTextTagExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextTagExample.m; sourceTree = "<group>"; };
 		D9067DEF1B975D3900F346EB /* YYTextExampleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextExampleHelper.h; sourceTree = "<group>"; };
@@ -797,6 +803,10 @@
 				D97484D819CAAD2900F46DE1 /* YYAppDelegate.m */,
 				D943B48B19EC2BC100A9481E /* YYRootViewController.h */,
 				D943B48C19EC2BC100A9481E /* YYRootViewController.m */,
+				1A51E91324C5ACF4000D0428 /* LCLinkedListNode.h */,
+				1A51E91424C5ACF4000D0428 /* LCLinkedListNode.m */,
+				1A51E91624C5AFD3000D0428 /* LCLinkedList.h */,
+				1A51E91724C5AFD3000D0428 /* LCLinkedList.m */,
 				D91A99311B5A8D1600EF3A3E /* Model */,
 				D91A99331B5A8D2A00EF3A3E /* Image */,
 				D91A99341B5A8D3500EF3A3E /* Text */,
@@ -1286,6 +1296,7 @@
 				D97484D619CAAD2900F46DE1 /* main.m in Sources */,
 				D91A99591B5ACB9200EF3A3E /* YYWebImageExample.m in Sources */,
 				D9CC99B01B87695300A9466D /* YYTextAttachmentExample.m in Sources */,
+				1A51E91524C5ACF4000D0428 /* LCLinkedListNode.m in Sources */,
 				D9B2608B1BEE79370038C00A /* NSParagraphStyle+YYText.m in Sources */,
 				D9B260741BEE79370038C00A /* MKAnnotationView+YYWebImage.m in Sources */,
 				D991962A1BA71AD80071C80E /* YYControl.m in Sources */,
@@ -1304,6 +1315,7 @@
 				D9B2607D1BEE79370038C00A /* YYWebImageManager.m in Sources */,
 				D9B2609F1BEE79370038C00A /* YYTransaction.m in Sources */,
 				D9067E1A1B98B6AE00F346EB /* WBModel.m in Sources */,
+				1A51E91824C5AFD3000D0428 /* LCLinkedList.m in Sources */,
 				D9B260611BEE79370038C00A /* UIBarButtonItem+YYAdd.m in Sources */,
 				D9067DFA1B98637B00F346EB /* YYTextEmoticonExample.m in Sources */,
 				D90F521F1B78537600C9B465 /* YYImageBenchmark.m in Sources */,
@@ -1499,7 +1511,7 @@
 					"$(PROJECT_DIR)/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibireme.YYKitDemo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibireme.YYKitDemo;
 				PRODUCT_NAME = YYKitDemo;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1527,7 +1539,7 @@
 					"$(PROJECT_DIR)/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibireme.YYKitDemo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibireme.YYKitDemo;
 				PRODUCT_NAME = YYKitDemo;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
