@@ -13,11 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LCLinkedList : NSObject
 
-@property (nonatomic, weak, nullable) LCLinkedListNode *headNode;
-@property (nonatomic, weak, nullable) LCLinkedListNode *trailNode;
+@property (nonatomic, strong, nullable) LCLinkedListNode *headNode;
+@property (nonatomic, strong, nullable) LCLinkedListNode *trailNode;
 @property (nonatomic, assign) NSUInteger totalCount;
 @property (nonatomic, assign) NSUInteger totalSize;
-
 
 
 -(void)insertNodeAtHead:(LCLinkedListNode *)node;

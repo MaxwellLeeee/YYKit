@@ -28,6 +28,39 @@
     return self;
 }
 
+//如果是使用的
+-(void)bringNodeToHead:(LCLinkedListNode *)node
+{
+    if(node == self.headNode){
+        return;
+    }
+    /*
+     1.将此节点的前节点的next指向此节点的后节点
+     2.将此节点的后节点的prev指向此节点的前节点
+     3.将此节点的prev指向原头节点的prev
+     3.将原头节点的prev指向这个节点
+     4.将此节点的next指向原头节点
+    */
+    
+    node.prev.next = node.next;
+    node.next.prev = node.prev;
+    
+    node.prev = self.headNode.prev;
+    node.next = self.headNode;
+    
+    self.headNode.prev = node;
+    self.headNode = node;
+}
+
+-(LCLinkedListNode *)removeTrailNode
+{
+    /*
+     1.链表为空，不处理
+     2.链表为已满
+     */
+    return nil;
+}
+
 -(void)insertFirstNode:(LCLinkedListNode *)node
 {
     node.prev = node;
