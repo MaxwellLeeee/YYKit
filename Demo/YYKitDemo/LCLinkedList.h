@@ -12,7 +12,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LCLinkedList : NSObject
-
+{
+    @package
+    CFMutableDictionaryRef _searchDic;
+}
 @property (nonatomic, strong, nullable) LCLinkedListNode *headNode;
 @property (nonatomic, strong, nullable) LCLinkedListNode *trailNode;
 @property (nonatomic, assign) NSUInteger totalCount;

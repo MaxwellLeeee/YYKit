@@ -7,8 +7,10 @@
 //
 
 #import "YYLRUManager.h"
+#import "LCLinkedListNode.h"
 #import "LCLinkedList.h"
 #import <pthread.h>
+#import <QuartzCore/QuartzCore.h>
 
 @implementation YYLRUManager{
     pthread_mutex_t _lock;
@@ -65,13 +67,17 @@
     while (!finish) {
         if (pthread_mutex_trylock(&_lock) == 0) {
             if (_lru.totalSize > self.sizeLimit) {
-                
+                LCLinkedListNode *node = [_lru removeTrailNode];
+                if (node) {
+                    [holder addObject:node];
+                }
             }else{
                 finish = YES;
             }
         }else{
             usleep(10 * 1000);
         }
+        pthread_mutex_unlock(&_lock);
     }
     if (holder.count > 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -82,7 +88,120 @@
 
 -(void)checkAge
 {
-    
+    BOOL finish = NO;
+    NSTimeInterval now = CACurrentMediaTime();
+    pthread_mutex_lock(&_lock);
+    if (_lru.totalCount == 0 || (now - _lru.trailNode.updateTIme) < self.ageLimit) {
+        finish = YES;
+    }
+    pthread_mutex_unlock(&_lock);
+    if (finish) {
+        return;
+    }
+    NSMutableArray *holder = [NSMutableArray new];
+    while (!finish) {
+        if (pthread_mutex_trylock(&_lock) == 0) {
+            if (_lru.totalCount > 0 && (now - _lru.trailNode.updateTIme > self.ageLimit)) {
+                LCLinkedListNode *node = [_lru removeTrailNode];
+                if (node) {
+                    [holder addObject:node];
+                }
+            }else{
+                finish = YES;
+            }
+        }else{
+            usleep(10 * 1000);
+        }
+        pthread_mutex_unlock(&_lock);
+    }
+    if (holder.count > 0) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [holder count];
+        });
+    }
+}
+
+-(BOOL)containsObjectForKey:(id)key
+{
+    if (!key) {
+        return NO;
+    }
+    pthread_mutex_lock(&_lock);
+    BOOL contains = CFDictionaryContainsKey(_lru->_searchDic, (__bridge const void *)(key));
+    pthread_mutex_unlock(&_lock);
+    return contains;
+}
+
+//取这个值就说明，用到了这个缓存，就需要把这个缓存移动到头节点
+-(id)objectForKey:(id)key
+{
+    if (!key) {
+        return nil;
+    }
+    pthread_mutex_lock(&_lock);
+    LCLinkedListNode *node = CFDictionaryGetValue(_lru->_searchDic, (__bridge const void *)(key));
+    if (node) {
+        node.updateTIme = CACurrentMediaTime();
+        [_lru bringNodeToHead:node];
+    }
+    pthread_mutex_unlock(&_lock);
+    return node ? node.data: nil;
+}
+
+
+/*
+链表为满的情况
+1.key在searchDic中能找到值node，那么替换掉node的value，把原value释放，并把node移动到头节点
+2.key在searchDic找不到对应的值，那么取最后一个node，替换key和value，把原value释放，把头节点和尾节点指向移动一位就可以了
+链表未满的情况
+1.key在searchDic中能找到值node，那么替换掉node的value，把原value释放，并把node移动到头节点
+2.key在searchDic找不到对应的值，创建一个node，设置key和value，插入到头节点
+*/
+-(void)setObject:(id)object forKey:(id)key withCost:(NSUInteger)cost
+{
+    if (!key) {
+        return;
+    }
+    if (!object) {
+        [self removeObjectForKey:key];
+        return;
+    }
+    pthread_mutex_lock(&_lock);
+    LCLinkedListNode *node = CFDictionaryGetValue(_lru->_searchDic, (__bridge const void *)(key));
+    NSTimeInterval now = CACurrentMediaTime();
+    id needReleaseValue;
+    if(node){ //找到了
+        needReleaseValue = object;
+        _lru.totalSize -= node.size;
+        _lru.totalSize += cost;
+        node.size = cost;
+        node.updateTIme = now;
+        node.data = object;
+        [_lru bringNodeToHead:node];
+    }else{ //没找到
+        if(_lru.totalCount >= self.countLimit){ //链表已满
+            _lru.totalSize += cost;
+            node = _lru.trailNode;
+            needReleaseValue = node.data;
+            node.size = cost;
+            node.updateTIme = now;
+            node.key = key;
+            node.data = object;
+            [_lru bringNodeToHead:node];
+        }else{ //链表未满
+            _lru.totalSize += cost;
+            node = [LCLinkedListNode new];
+            node.size = cost;
+            node.updateTIme = now;
+            node.key = key;
+            node.data = object;
+            [_lru insertNodeAtHead:node];
+        }
+    }
+    if (needReleaseValue) {
+        //TODO:
+    }
+    pthread_mutex_unlock(&_lock);
 }
 
 @end
