@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YYLRUManager : NSObject
+@interface LCLRUManager : NSObject
 
 @property NSUInteger countLimit;
 @property NSUInteger sizeLimit;

@@ -6,13 +6,13 @@
 //  Copyright © 2020 ibireme. All rights reserved.
 //
 
-#import "YYLRUManager.h"
+#import "LCLRUManager.h"
 #import "LCLinkedListNode.h"
 #import "LCLinkedList.h"
 #import <pthread.h>
 #import <QuartzCore/QuartzCore.h>
 
-@implementation YYLRUManager{
+@implementation LCLRUManager{
     pthread_mutex_t _lock;
     LCLinkedList *_lru;
     dispatch_queue_t _queue;
@@ -29,6 +29,7 @@
         _sizeLimit = NSUIntegerMax;
         _ageLimit = DBL_MAX;
         _autoTrimInterval = 5.0;
+        [self tryToFindNeedDeleteMemory];
     }
     return self;
 }
@@ -180,6 +181,7 @@
         [_lru bringNodeToHead:node];
     }else{ //没找到
         if(_lru.totalCount >= self.countLimit){ //链表已满
+            _lru.totalSize -= _lru.trailNode.size;
             _lru.totalSize += cost;
             node = _lru.trailNode;
             needReleaseValue = node.data;
@@ -189,7 +191,6 @@
             node.data = object;
             [_lru bringNodeToHead:node];
         }else{ //链表未满
-            _lru.totalSize += cost;
             node = [LCLinkedListNode new];
             node.size = cost;
             node.updateTIme = now;
@@ -200,6 +201,27 @@
     }
     if (needReleaseValue) {
         //TODO:
+    }
+    pthread_mutex_unlock(&_lock);
+}
+
+- (void)removeAllObjects {
+    pthread_mutex_lock(&_lock);
+    [_lru clearAllNodes];
+    pthread_mutex_unlock(&_lock);
+}
+
+- (void)removeObjectForKey:(id)key {
+    if (!key) {
+        return;
+    }
+    pthread_mutex_lock(&_lock);
+    LCLinkedListNode *node = CFDictionaryGetValue(_lru->_searchDic, (__bridge const void *)(key));
+    if (node) {
+        [_lru removeNode:node];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [node class];
+        });
     }
     pthread_mutex_unlock(&_lock);
 }

@@ -32,6 +32,11 @@
     if(node == self.headNode){
         return;
     }
+    if (node == self.trailNode) {
+        self.headNode = self.trailNode;
+        self.trailNode = self.trailNode.prev;
+        return;
+    }
     /*
      1.将此节点的前节点的next指向此节点的后节点
      2.将此节点的后节点的prev指向此节点的前节点
@@ -48,6 +53,30 @@
     
     self.headNode.prev = node;
     self.headNode = node;
+}
+
+-(void)insertFirstNode:(LCLinkedListNode *)node
+{
+    node.prev = node;
+    node.next = node;
+    self.headNode = node;
+    self.trailNode = node;
+}
+
+-(void)insertNodeAtHead:(LCLinkedListNode *)node
+{
+    if (self.totalCount == 0) { //空
+        [self insertFirstNode:node];
+    }else{
+        node.prev = self.headNode.prev;
+        node.next = self.headNode;
+        
+        self.headNode.prev = node;
+        self.headNode = node;
+    }
+    CFDictionarySetValue(_searchDic, (__bridge const void *)(node.key), (__bridge const void *)(node));
+    self.totalSize += node.size;
+    self.totalCount ++;
 }
 
 -(LCLinkedListNode *)removeTrailNode
@@ -72,34 +101,18 @@
     return trail;
 }
 
--(void)insertFirstNode:(LCLinkedListNode *)node
+-(void)clearAllNodes
 {
-    node.prev = node;
-    node.next = node;
-    self.headNode = node;
-    self.trailNode = node;
-}
-
--(void)insertNodeAtHead:(LCLinkedListNode *)node
-{
-    if (self.totalCount == 0) { //空
-        [self insertFirstNode:node];
-    }else if (self.headNode == self.trailNode){ //满
-        
-    }else{
-        
-    }
-}
-
--(void)insertToHeadData:(id)object andKey:(NSString *)key cost:(NSUInteger)size
-{
-    if (self.headNode && self.headNode == self.trailNode) { //链表满了，就直接把第一个替换，searchDic中不用移除
-        NSString *needDeleteKey = self.headNode.key;
-        NSString *needDeleteData = self.headNode.data;
-        self.headNode.key = key;
-        self.headNode.data = object;
-        self.headNode.size = size;
-        self.headNode.updateTIme = CACurrentMediaTime();
+    self.totalSize = 0;
+    self.totalCount = 0;
+    self.headNode = nil;
+    self.trailNode = nil;
+    if (CFDictionaryGetCount(_searchDic) > 0) {
+        CFMutableDictionaryRef holder = _searchDic;
+        _searchDic = CFDictionaryCreateMutable(CFAllocatorGetDefault(), 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CFRelease(holder);
+        });
     }
 }
 

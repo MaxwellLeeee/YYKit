@@ -8,10 +8,14 @@
 
 #import "YYRootViewController.h"
 #import "YYKit.h"
+#import "LCLRUManager.h"
 
 @interface YYRootViewController ()
 @property (nonatomic, strong) NSMutableArray *titles;
 @property (nonatomic, strong) NSMutableArray *classNames;
+@property (nonatomic, strong) LCLRUManager *circleLinkListManager;
+@property (nonatomic, strong) YYMemoryCache *yyManager;
+
 @end
 
 @implementation YYRootViewController
@@ -66,6 +70,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        [self testYYLinkListMap];
+    }else if(indexPath.row == 1){
+        [self testCircleLinkList];
+    }
+    return;
     NSString *className = self.classNames[indexPath.row];
     Class class = NSClassFromString(className);
     if (class) {
@@ -74,6 +84,51 @@
         [self.navigationController pushViewController:ctrl animated:YES];
     }
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+-(void)testYYLinkListMap
+{
+    NSTimeInterval start = [[NSDate date] timeIntervalSince1970];
+    NSString *data = @"iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii";
+    for (int i = 0; i < 100000; i ++) {
+        NSString *key = @(i).stringValue;
+        [self.yyManager setObject:data forKey:key withCost:data.length * 2];
+    }
+    NSTimeInterval end = [[NSDate date] timeIntervalSince1970];
+    NSLog(@"YYLinkListMap cost = %f", (end - start));
+}
+
+-(void)testCircleLinkList
+{
+    NSTimeInterval start = [[NSDate date] timeIntervalSince1970];
+    NSString *data = @"iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii";
+    for (int i = 0; i < 100000; i ++) {
+        NSString *key = @(i).stringValue;
+        [self.circleLinkListManager setObject:data forKey:key withCost:data.length * 2];
+    }
+    NSTimeInterval end = [[NSDate date] timeIntervalSince1970];
+    NSLog(@"CircleLinkList cost = %f", (end - start));
+}
+
+#pragma mark - getters
+
+-(LCLRUManager *)circleLinkListManager
+{
+    if (!_circleLinkListManager) {
+        _circleLinkListManager = [[LCLRUManager alloc] init];
+        _circleLinkListManager.countLimit = 10;
+        _circleLinkListManager.sizeLimit = 10 * 1024 * 1024;
+        _circleLinkListManager.autoTrimInterval = 5;
+    }
+    return _circleLinkListManager;
+}
+
+-(YYMemoryCache *)yyManager
+{
+    if (!_yyManager) {
+        _yyManager = [[YYMemoryCache alloc] init];
+    }
+    return _yyManager;
 }
 
 @end
