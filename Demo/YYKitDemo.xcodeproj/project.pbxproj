@@ -10,6 +10,7 @@
 		1A2A65C724C8597000FB30F6 /* LCLRUManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A65C624C8597000FB30F6 /* LCLRUManager.m */; };
 		1A51E91524C5ACF4000D0428 /* LCLinkedListNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A51E91424C5ACF4000D0428 /* LCLinkedListNode.m */; };
 		1A51E91824C5AFD3000D0428 /* LCLinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A51E91724C5AFD3000D0428 /* LCLinkedList.m */; };
+		1A59C81724CE81E000EEDED8 /* LCShowAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A59C81624CE81DF00EEDED8 /* LCShowAnimationController.m */; };
 		ABDC320D1BEAFB870012A159 /* YYTextTagExample.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDC320C1BEAFB870012A159 /* YYTextTagExample.m */; };
 		D9067DF11B975D3900F346EB /* YYTextExampleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D9067DF01B975D3900F346EB /* YYTextExampleHelper.m */; };
 		D9067DF41B9813B500F346EB /* YYTextEditExample.m in Sources */ = {isa = PBXBuildFile; fileRef = D9067DF31B9813B500F346EB /* YYTextEditExample.m */; };
@@ -205,6 +206,8 @@
 		1A51E91424C5ACF4000D0428 /* LCLinkedListNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLinkedListNode.m; sourceTree = "<group>"; };
 		1A51E91624C5AFD3000D0428 /* LCLinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCLinkedList.h; sourceTree = "<group>"; };
 		1A51E91724C5AFD3000D0428 /* LCLinkedList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLinkedList.m; sourceTree = "<group>"; };
+		1A59C81524CE81DF00EEDED8 /* LCShowAnimationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCShowAnimationController.h; sourceTree = "<group>"; };
+		1A59C81624CE81DF00EEDED8 /* LCShowAnimationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCShowAnimationController.m; sourceTree = "<group>"; };
 		ABDC320B1BEAFB870012A159 /* YYTextTagExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextTagExample.h; sourceTree = "<group>"; };
 		ABDC320C1BEAFB870012A159 /* YYTextTagExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextTagExample.m; sourceTree = "<group>"; };
 		D9067DEF1B975D3900F346EB /* YYTextExampleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextExampleHelper.h; sourceTree = "<group>"; };
@@ -812,6 +815,8 @@
 				1A51E91724C5AFD3000D0428 /* LCLinkedList.m */,
 				1A2A65C524C8597000FB30F6 /* LCLRUManager.h */,
 				1A2A65C624C8597000FB30F6 /* LCLRUManager.m */,
+				1A59C81524CE81DF00EEDED8 /* LCShowAnimationController.h */,
+				1A59C81624CE81DF00EEDED8 /* LCShowAnimationController.m */,
 				D91A99311B5A8D1600EF3A3E /* Model */,
 				D91A99331B5A8D2A00EF3A3E /* Image */,
 				D91A99341B5A8D3500EF3A3E /* Text */,
@@ -1253,6 +1258,7 @@
 				D9B260941BEE79370038C00A /* YYTextView.m in Sources */,
 				D9B260781BEE79370038C00A /* YYFrameImage.m in Sources */,
 				D9067E001B9879E300F346EB /* YYFPSLabel.m in Sources */,
+				1A59C81724CE81E000EEDED8 /* LCShowAnimationController.m in Sources */,
 				D9B260511BEE79370038C00A /* NSBundle+YYAdd.m in Sources */,
 				D9067E231B9A0B9D00F346EB /* WBStatusLayout.m in Sources */,
 				D94D6D121BA323DA00852804 /* YYSimpleWebViewController.m in Sources */,

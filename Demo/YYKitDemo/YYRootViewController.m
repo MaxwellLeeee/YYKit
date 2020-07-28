@@ -9,6 +9,7 @@
 #import "YYRootViewController.h"
 #import "YYKit.h"
 #import "LCLRUManager.h"
+#import "LCShowAnimationController.h"
 
 @interface YYRootViewController ()
 @property (nonatomic, strong) NSMutableArray *titles;
@@ -74,6 +75,10 @@
         [self testYYLinkListMap];
     }else if(indexPath.row == 1){
         [self testCircleLinkList];
+    }else{
+        LCShowAnimationController *ctr = [LCShowAnimationController new];
+        ctr.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:ctr animated:YES];
     }
     return;
     NSString *className = self.classNames[indexPath.row];
@@ -116,7 +121,7 @@
 {
     if (!_circleLinkListManager) {
         _circleLinkListManager = [[LCLRUManager alloc] init];
-        _circleLinkListManager.countLimit = 10;
+        _circleLinkListManager.countLimit = 800;
         _circleLinkListManager.sizeLimit = 10 * 1024 * 1024;
         _circleLinkListManager.autoTrimInterval = 5;
     }
@@ -127,6 +132,10 @@
 {
     if (!_yyManager) {
         _yyManager = [[YYMemoryCache alloc] init];
+        _yyManager.countLimit = 800;
+        _yyManager.costLimit = 10 * 1024 * 1024;
+        _yyManager.autoTrimInterval = 5;
+        _yyManager.releaseOnMainThread = YES;
     }
     return _yyManager;
 }
