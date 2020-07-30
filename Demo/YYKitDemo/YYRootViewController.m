@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSMutableArray *classNames;
 @property (nonatomic, strong) LCLRUManager *circleLinkListManager;
 @property (nonatomic, strong) YYMemoryCache *yyManager;
+@property (nonatomic, strong) NSCache *cache;
 
 @end
 
@@ -75,6 +76,8 @@
         [self testYYLinkListMap];
     }else if(indexPath.row == 1){
         [self testCircleLinkList];
+    }else if (indexPath.row == 2){
+        [self testNSCache];
     }else{
         LCShowAnimationController *ctr = [LCShowAnimationController new];
         ctr.hidesBottomBarWhenPushed = YES;
@@ -115,6 +118,18 @@
     NSLog(@"CircleLinkList cost = %f", (end - start));
 }
 
+-(void)testNSCache
+{
+    NSTimeInterval start = [[NSDate date] timeIntervalSince1970];
+    NSString *data = @"iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii";
+    for (int i = 0; i < 100000; i ++) {
+        NSString *key = @(i).stringValue;
+        [self.cache setObject:data forKey:key cost:data.length * 2];
+    }
+    NSTimeInterval end = [[NSDate date] timeIntervalSince1970];
+    NSLog(@"NSCache cost = %f", (end - start));
+}
+
 #pragma mark - getters
 
 -(LCLRUManager *)circleLinkListManager
@@ -140,4 +155,13 @@
     return _yyManager;
 }
 
+-(NSCache *)cache
+{
+    if (!_cache) {
+        _cache = [[NSCache alloc] init];
+        _cache.countLimit = 800;
+        _cache.totalCostLimit = 10 * 1024 * 1024;
+    }
+    return _cache;
+}
 @end
