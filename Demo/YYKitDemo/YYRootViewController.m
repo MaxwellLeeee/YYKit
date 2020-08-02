@@ -10,6 +10,7 @@
 #import "YYKit.h"
 #import "LCLRUManager.h"
 #import "LCShowAnimationController.h"
+#import "LCCircleListViewController.h"
 
 @interface YYRootViewController ()
 @property (nonatomic, strong) NSMutableArray *titles;
@@ -79,7 +80,8 @@
     }else if (indexPath.row == 2){
         [self testNSCache];
     }else{
-        LCShowAnimationController *ctr = [LCShowAnimationController new];
+//        LCShowAnimationController *ctr = [LCShowAnimationController new];
+        LCCircleListViewController *ctr = [LCCircleListViewController new];
         ctr.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:ctr animated:YES];
     }
