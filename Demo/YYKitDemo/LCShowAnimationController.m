@@ -14,6 +14,7 @@
 #define kLineHeight (1.0)
 
 
+
 @interface LCShowAnimationController ()
 
 
@@ -309,7 +310,7 @@
         _checkLabel = [UILabel new];
         _checkLabel.textColor = [UIColor blackColor];
         _checkLabel.numberOfLines = 0;
-        _checkLabel.text = @"检查尾节点\n更新时间\n总数量\n总大小";
+        _checkLabel.text = @"检查尾结点\n更新时间\n总数量\n总大小";
         _checkLabel.font = [UIFont systemFontOfSize:14];
         [_checkLabel sizeToFit];
     }

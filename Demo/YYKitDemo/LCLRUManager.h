@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSUInteger sizeLimit;
 @property NSTimeInterval ageLimit;
 @property NSTimeInterval autoTrimInterval;
+@property (nonatomic, strong) NSMutableSet *reuseArr;
 
 - (BOOL)containsObjectForKey:(id)key;
 - (nullable id)objectForKey:(id)key;

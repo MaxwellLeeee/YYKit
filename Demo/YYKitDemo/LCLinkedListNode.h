@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LCLinkedListNode : NSObject
 
-@property (nonatomic, strong) NSString *key;
-@property (nonatomic, strong) id data;
+@property (nonatomic, strong, nullable) NSString *key;
+@property (nonatomic, strong, nullable) id data;
 @property (nonatomic, weak, nullable) LCLinkedListNode *next;
 @property (nonatomic, weak, nullable) LCLinkedListNode *prev;
 @property (nonatomic, assign) NSUInteger size;

@@ -78,12 +78,13 @@
         }else{
             usleep(10 * 1000);
         }
+        if (holder.count > 0) {
+            //        dispatch_async(dispatch_get_main_queue(), ^{
+            //            [holder count];
+            //        });
+            [self putIntoReuseWithNodeArr:holder];
+        }
         pthread_mutex_unlock(&_lock);
-    }
-    if (holder.count > 0) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [holder count];
-        });
     }
 }
 
@@ -113,12 +114,13 @@
         }else{
             usleep(10 * 1000);
         }
+        if (holder.count > 0) {
+            //        dispatch_async(dispatch_get_main_queue(), ^{
+            //            [holder count];
+            //        });
+            [self putIntoReuseWithNodeArr:holder];
+        }
         pthread_mutex_unlock(&_lock);
-    }
-    if (holder.count > 0) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [holder count];
-        });
     }
 }
 
@@ -180,7 +182,17 @@
         node.data = object;
         [_lru bringNodeToHead:node];
     }else{ //没找到
-        if(_lru.totalCount >= self.countLimit){ //链表已满
+        if(_lru.totalCount >= self.countLimit){ //受个数限制，链表已满
+            _lru.totalSize -= _lru.trailNode.size;
+            _lru.totalSize += cost;
+            node = _lru.trailNode;
+            needReleaseValue = node.data;
+            node.size = cost;
+            node.updateTIme = now;
+            node.key = key;
+            node.data = object;
+            [_lru bringNodeToHead:node];
+        }else if(_lru.totalSize >= self.sizeLimit){ //受大小限制，链表已满
             _lru.totalSize -= _lru.trailNode.size;
             _lru.totalSize += cost;
             node = _lru.trailNode;
@@ -191,7 +203,8 @@
             node.data = object;
             [_lru bringNodeToHead:node];
         }else{ //链表未满
-            node = [LCLinkedListNode new];
+            //            node = [LCLinkedListNode new];
+            node = [self makeNewNode];
             node.size = cost;
             node.updateTIme = now;
             node.key = key;
@@ -217,13 +230,48 @@
     }
     pthread_mutex_lock(&_lock);
     LCLinkedListNode *node = CFDictionaryGetValue(_lru->_searchDic, (__bridge const void *)(key));
-    if (node) {
-        [_lru removeNode:node];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [node class];
-        });
-    }
+//    if (node) {
+//        [_lru removeNode:node];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [node class];
+//        });
+//    }
+    [self putIntoReuse:node];
     pthread_mutex_unlock(&_lock);
+}
+
+-(LCLinkedListNode *)makeNewNode
+{
+    if (self.reuseArr.count > 0) {
+        LCLinkedListNode *firstNode = [self.reuseArr anyObject];
+        [self.reuseArr removeObject:firstNode];
+        return firstNode;
+    }
+    return [LCLinkedListNode new];
+}
+
+-(void)putIntoReuse:(LCLinkedListNode *)node
+{
+    //不删除node，只释放内容
+    node.data = nil;
+    [self.reuseArr addObject:node];
+}
+
+-(void)putIntoReuseWithNodeArr:(NSArray <LCLinkedListNode *> *) nodeArr
+{
+    //不删除node，只释放内容
+    for (LCLinkedListNode *node in nodeArr) {
+        node.data = nil;
+    }
+    [self.reuseArr addObjectsFromArray:nodeArr];
+}
+
+-(NSMutableSet *)reuseArr
+{
+    if (!_reuseArr) {
+        _reuseArr = [[NSMutableSet alloc] initWithCapacity:0];
+    }
+    return _reuseArr;
 }
 
 @end

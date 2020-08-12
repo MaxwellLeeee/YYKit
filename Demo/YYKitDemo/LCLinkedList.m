@@ -89,6 +89,17 @@
     if(self.totalCount == 0){
         return nil;
     }
+    if (!self.trailNode.key) {
+        LCLinkedListNode *trail = self.trailNode;
+        _totalCount --;
+        _totalSize -= self.trailNode.size;
+        if (self.headNode != self.trailNode) {
+            self.trailNode = self.trailNode.prev;
+            self.trailNode.next = self.headNode;
+            self.headNode.prev = self.trailNode;
+        }
+        return trail;
+    }
     LCLinkedListNode *trail = self.trailNode;
     CFDictionaryRemoveValue(_searchDic, (__bridge const void *)(self.trailNode.key));
     _totalCount --;
@@ -115,5 +126,6 @@
         });
     }
 }
+
 
 @end

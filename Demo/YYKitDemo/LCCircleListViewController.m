@@ -74,7 +74,7 @@
         _headNode = [UILabel new];
         _headNode.numberOfLines = 0;
         _headNode.font = [UIFont systemFontOfSize:14];
-        _headNode.text = @"头\n节\n点";
+        _headNode.text = @"头\n结\n点";
         [_headNode sizeToFit];
     }
     return _headNode;
@@ -86,7 +86,7 @@
         _trailNode = [UILabel new];
         _trailNode.numberOfLines = 0;
         _trailNode.font = [UIFont systemFontOfSize:14];
-        _trailNode.text = @"尾\n节\n点";
+        _trailNode.text = @"尾\n结\n点";
         [_trailNode sizeToFit];
     }
     return _trailNode;
