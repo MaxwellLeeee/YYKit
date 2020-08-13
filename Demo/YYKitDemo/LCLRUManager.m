@@ -12,6 +12,9 @@
 #import <pthread.h>
 #import <QuartzCore/QuartzCore.h>
 
+
+#define kUseReuseSet (1)
+
 @implementation LCLRUManager{
     pthread_mutex_t _lock;
     LCLinkedList *_lru;
@@ -78,13 +81,20 @@
         }else{
             usleep(10 * 1000);
         }
+#if kUseReuseSet
         if (holder.count > 0) {
-            //        dispatch_async(dispatch_get_main_queue(), ^{
-            //            [holder count];
-            //        });
             [self putIntoReuseWithNodeArr:holder];
         }
+#endif
         pthread_mutex_unlock(&_lock);
+#if kUseReuseSet
+#else
+        if (holder.count > 0) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [holder count];
+            });
+        }
+#endif
     }
 }
 
@@ -114,13 +124,20 @@
         }else{
             usleep(10 * 1000);
         }
+#if kUseReuseSet
         if (holder.count > 0) {
-            //        dispatch_async(dispatch_get_main_queue(), ^{
-            //            [holder count];
-            //        });
             [self putIntoReuseWithNodeArr:holder];
         }
+#endif
         pthread_mutex_unlock(&_lock);
+#if kUseReuseSet
+#else
+        if (holder.count > 0) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [holder count];
+            });
+        }
+#endif
     }
 }
 
@@ -160,7 +177,7 @@
 1.key在searchDic中能找到值node，那么替换掉node的value，把原value释放，并把node移动到头节点
 2.key在searchDic找不到对应的值，创建一个node，设置key和value，插入到头节点
 */
--(void)setObject:(id)object forKey:(id)key withCost:(NSUInteger)cost
+-(void)setObject:(id)object forKey:(id)key cost:(NSUInteger)cost
 {
     if (!key) {
         return;
@@ -185,6 +202,7 @@
         if(_lru.totalCount >= self.countLimit){ //受个数限制，链表已满
             _lru.totalSize -= _lru.trailNode.size;
             _lru.totalSize += cost;
+            [_lru removeFromSearchDicWithKey:_lru.trailNode.key];
             node = _lru.trailNode;
             needReleaseValue = node.data;
             node.size = cost;
@@ -195,6 +213,7 @@
         }else if(_lru.totalSize >= self.sizeLimit){ //受大小限制，链表已满
             _lru.totalSize -= _lru.trailNode.size;
             _lru.totalSize += cost;
+            [_lru removeFromSearchDicWithKey:_lru.trailNode.key];
             node = _lru.trailNode;
             needReleaseValue = node.data;
             node.size = cost;
@@ -230,13 +249,16 @@
     }
     pthread_mutex_lock(&_lock);
     LCLinkedListNode *node = CFDictionaryGetValue(_lru->_searchDic, (__bridge const void *)(key));
-//    if (node) {
-//        [_lru removeNode:node];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [node class];
-//        });
-//    }
+#if kUseReuseSet
     [self putIntoReuse:node];
+#else
+    if (node) {
+        [_lru removeNode:node];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [node class];
+        });
+    }
+#endif
     pthread_mutex_unlock(&_lock);
 }
 

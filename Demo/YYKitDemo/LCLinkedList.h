@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)insertNodeAtHead:(LCLinkedListNode *)node;
 -(void)bringNodeToHead:(LCLinkedListNode *)node;
+-(void)removeFromSearchDicWithKey:(NSString *)key;
 -(void)removeNode:(LCLinkedListNode *)node;
 -(LCLinkedListNode *)removeTrailNode;
 -(void)clearAllNodes;

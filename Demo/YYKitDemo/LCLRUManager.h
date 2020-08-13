@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)containsObjectForKey:(id)key;
 - (nullable id)objectForKey:(id)key;
-- (void)setObject:(nullable id)object forKey:(id)key withCost:(NSUInteger)cost;
+- (void)setObject:(nullable id)object forKey:(id)key cost:(NSUInteger)cost;
 - (void)removeObjectForKey:(id)key;
 - (void)removeAllObjects;
 

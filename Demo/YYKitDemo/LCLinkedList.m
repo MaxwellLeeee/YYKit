@@ -26,6 +26,11 @@
     return self;
 }
 
+-(void)removeFromSearchDicWithKey:(NSString *)key
+{
+    CFDictionaryRemoveValue(_searchDic, (__bridge const void *)(key));
+}
+
 //如果node就是尾节点，因为是环形链表，直接改变headNode和trailNode的指向就可以了
 -(void)bringNodeToHead:(LCLinkedListNode *)node
 {
@@ -35,6 +40,7 @@
     if (node == self.trailNode) {
         self.headNode = self.trailNode;
         self.trailNode = self.trailNode.prev;
+        CFDictionarySetValue(_searchDic, (__bridge const void *)(node.key), (__bridge const void *)(node));
         return;
     }
     /*
@@ -110,6 +116,11 @@
         self.headNode.prev = self.trailNode;
     }
     return trail;
+}
+
+-(void)removeNode
+{
+    
 }
 
 -(void)clearAllNodes
