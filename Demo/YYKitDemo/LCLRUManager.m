@@ -37,6 +37,12 @@
     return self;
 }
 
+
+- (void)dealloc {
+    [_lru clearAllNodes];
+    pthread_mutex_destroy(&_lock);
+}
+
 -(void)tryToFindNeedDeleteMemory
 {
     __weak typeof(self) _self = self;

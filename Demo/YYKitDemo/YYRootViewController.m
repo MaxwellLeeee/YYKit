@@ -131,7 +131,7 @@
     NSString *data = @"iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii";
     for (int i = 0; i < kLoopCpunt; i ++) {
         NSString *key = @(i).stringValue;
-        [self.circleLinkListManager setObject:data forKey:key withCost:1024 * 10];
+        [self.circleLinkListManager setObject:data forKey:key cost:1024 * 10];
     }
     NSTimeInterval end = [[NSDate date] timeIntervalSince1970];
     NSLog(@"CircleLinkList cost = %f", (end - start));
@@ -149,7 +149,7 @@
     NSString *data = @"iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii";
     for (int i = 0; i < kLoopCpunt; i ++) {
         NSString *key = @(i).stringValue;
-        [manager setObject:data forKey:key withCost:data.length * 2];
+        [manager setObject:data forKey:key cost:data.length * 2];
     }
     NSTimeInterval end = [[NSDate date] timeIntervalSince1970];
     NSLog(@"CircleLinkList count = %ld cost = %f", (long)count, (end - start));
@@ -173,7 +173,7 @@
     NSUInteger singleCost = count * 1024 * 1024 / kFullSize;
     for (int i = 0; i < kLoopCpunt; i ++) {
         NSString *key = @(i).stringValue;
-        [manager setObject:data forKey:key withCost:singleCost];
+        [manager setObject:data forKey:key cost:singleCost];
     }
     NSTimeInterval end = [[NSDate date] timeIntervalSince1970];
     NSLog(@"CircleLinkList size limnit = %ld MB singleSize = %ld cost = %f", (long)count, singleCost, (end - start));
