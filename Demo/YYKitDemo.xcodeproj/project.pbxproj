@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		1A2A65C724C8597000FB30F6 /* LCLRUManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A65C624C8597000FB30F6 /* LCLRUManager.m */; };
+		1A37103C24EFA7D800E1BDE6 /* LCDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A37103B24EFA7D800E1BDE6 /* LCDiskCache.m */; };
+		1A37103F24EFB54500E1BDE6 /* YYDIskCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A37103E24EFB54500E1BDE6 /* YYDIskCacheManager.m */; };
 		1A51E91524C5ACF4000D0428 /* LCLinkedListNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A51E91424C5ACF4000D0428 /* LCLinkedListNode.m */; };
 		1A51E91824C5AFD3000D0428 /* LCLinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A51E91724C5AFD3000D0428 /* LCLinkedList.m */; };
 		1A59C81724CE81E000EEDED8 /* LCShowAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A59C81624CE81DF00EEDED8 /* LCShowAnimationController.m */; };
-		1AA81B4A24D2723E00C0C033 /* LCCircleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA81B4924D2723E00C0C033 /* LCCircleListViewController.m */; };
 		1A74562C24D6FC6B0037A3CB /* DragImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A74562824D6FC6B0037A3CB /* DragImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1A74562D24D6FC6B0037A3CB /* CircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A74562924D6FC6B0037A3CB /* CircleView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1AA81B4A24D2723E00C0C033 /* LCCircleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA81B4924D2723E00C0C033 /* LCCircleListViewController.m */; };
 		ABDC320D1BEAFB870012A159 /* YYTextTagExample.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDC320C1BEAFB870012A159 /* YYTextTagExample.m */; };
 		D9067DF11B975D3900F346EB /* YYTextExampleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D9067DF01B975D3900F346EB /* YYTextExampleHelper.m */; };
 		D9067DF41B9813B500F346EB /* YYTextEditExample.m in Sources */ = {isa = PBXBuildFile; fileRef = D9067DF31B9813B500F346EB /* YYTextEditExample.m */; };
@@ -205,18 +207,22 @@
 /* Begin PBXFileReference section */
 		1A2A65C524C8597000FB30F6 /* LCLRUManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCLRUManager.h; sourceTree = "<group>"; };
 		1A2A65C624C8597000FB30F6 /* LCLRUManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLRUManager.m; sourceTree = "<group>"; };
+		1A37103A24EFA7D800E1BDE6 /* LCDiskCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCDiskCache.h; sourceTree = "<group>"; };
+		1A37103B24EFA7D800E1BDE6 /* LCDiskCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCDiskCache.m; sourceTree = "<group>"; };
+		1A37103D24EFB54500E1BDE6 /* YYDiskCacheManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YYDiskCacheManager.h; sourceTree = "<group>"; };
+		1A37103E24EFB54500E1BDE6 /* YYDIskCacheManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YYDIskCacheManager.m; sourceTree = "<group>"; };
 		1A51E91324C5ACF4000D0428 /* LCLinkedListNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCLinkedListNode.h; sourceTree = "<group>"; };
 		1A51E91424C5ACF4000D0428 /* LCLinkedListNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLinkedListNode.m; sourceTree = "<group>"; };
 		1A51E91624C5AFD3000D0428 /* LCLinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCLinkedList.h; sourceTree = "<group>"; };
 		1A51E91724C5AFD3000D0428 /* LCLinkedList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLinkedList.m; sourceTree = "<group>"; };
 		1A59C81524CE81DF00EEDED8 /* LCShowAnimationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCShowAnimationController.h; sourceTree = "<group>"; };
 		1A59C81624CE81DF00EEDED8 /* LCShowAnimationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCShowAnimationController.m; sourceTree = "<group>"; };
-		1AA81B4824D2723E00C0C033 /* LCCircleListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCCircleListViewController.h; sourceTree = "<group>"; };
-		1AA81B4924D2723E00C0C033 /* LCCircleListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCCircleListViewController.m; sourceTree = "<group>"; };
 		1A74562824D6FC6B0037A3CB /* DragImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragImageView.m; sourceTree = "<group>"; };
 		1A74562924D6FC6B0037A3CB /* CircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleView.m; sourceTree = "<group>"; };
 		1A74562A24D6FC6B0037A3CB /* DragImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragImageView.h; sourceTree = "<group>"; };
 		1A74562B24D6FC6B0037A3CB /* CircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleView.h; sourceTree = "<group>"; };
+		1AA81B4824D2723E00C0C033 /* LCCircleListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCCircleListViewController.h; sourceTree = "<group>"; };
+		1AA81B4924D2723E00C0C033 /* LCCircleListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCCircleListViewController.m; sourceTree = "<group>"; };
 		ABDC320B1BEAFB870012A159 /* YYTextTagExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextTagExample.h; sourceTree = "<group>"; };
 		ABDC320C1BEAFB870012A159 /* YYTextTagExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextTagExample.m; sourceTree = "<group>"; };
 		D9067DEF1B975D3900F346EB /* YYTextExampleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextExampleHelper.h; sourceTree = "<group>"; };
@@ -835,6 +841,10 @@
 				1A51E91724C5AFD3000D0428 /* LCLinkedList.m */,
 				1A2A65C524C8597000FB30F6 /* LCLRUManager.h */,
 				1A2A65C624C8597000FB30F6 /* LCLRUManager.m */,
+				1A37103A24EFA7D800E1BDE6 /* LCDiskCache.h */,
+				1A37103B24EFA7D800E1BDE6 /* LCDiskCache.m */,
+				1A37103D24EFB54500E1BDE6 /* YYDiskCacheManager.h */,
+				1A37103E24EFB54500E1BDE6 /* YYDIskCacheManager.m */,
 				1A59C81524CE81DF00EEDED8 /* LCShowAnimationController.h */,
 				1A59C81624CE81DF00EEDED8 /* LCShowAnimationController.m */,
 				1AA81B4824D2723E00C0C033 /* LCCircleListViewController.h */,
@@ -1304,6 +1314,7 @@
 				D9971BB01B84D55A00A7B424 /* YYTextAttributeExample.m in Sources */,
 				D9B260A01BEE79370038C00A /* YYWeakProxy.m in Sources */,
 				D9B260951BEE79370038C00A /* YYAsyncLayer.m in Sources */,
+				1A37103C24EFA7D800E1BDE6 /* LCDiskCache.m in Sources */,
 				D9B260691BEE79370038C00A /* UIScreen+YYAdd.m in Sources */,
 				D9B2607F1BEE79370038C00A /* NSObject+YYModel.m in Sources */,
 				D9B2608E1BEE79370038C00A /* YYTextAttribute.m in Sources */,
@@ -1334,6 +1345,7 @@
 				1A51E91524C5ACF4000D0428 /* LCLinkedListNode.m in Sources */,
 				D9B2608B1BEE79370038C00A /* NSParagraphStyle+YYText.m in Sources */,
 				D9B260741BEE79370038C00A /* MKAnnotationView+YYWebImage.m in Sources */,
+				1A37103F24EFB54500E1BDE6 /* YYDIskCacheManager.m in Sources */,
 				D991962A1BA71AD80071C80E /* YYControl.m in Sources */,
 				D9B260901BEE79370038C00A /* YYTextRubyAnnotation.m in Sources */,
 				D9067E3A1B9AF7B300F346EB /* WBStatusHelper.m in Sources */,
